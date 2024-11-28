@@ -23,6 +23,7 @@ export const todos = createTable(
   "todo",
   {
     id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+    userId: varchar("user_id", { length: 256 }).notNull(),
     title: varchar("title", { length: 256 }).notNull(),
     completed: boolean("completed").default(false).notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
@@ -31,5 +32,6 @@ export const todos = createTable(
   },
   (todo) => ({
     titleIndex: index("title_idx").on(todo.title),
+    userIdIndex: index("user_id_idx").on(todo.userId),
   }),
 );
